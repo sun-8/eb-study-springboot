@@ -34,6 +34,19 @@ file3Info.addEventListener("change", (event) => {
     file3Name.value = event.target.files[0].name;
 })
 
+// let file1Info = document.getElementById("file1Info");
+// file1Info.addEventListener("change", (event) => {
+//     event.preventDefault();
+//
+//     let file1 = document.getElementById("file1");
+//     let obj = {
+//         inputFile : event.target,
+//         originName : file1
+//     }
+//
+//     fileUpload(event.target.files[0], obj);
+// })
+
 // 등록 버튼 이벤트
 let regBtn = document.getElementById("regBtn");
 regBtn.addEventListener("click", (event) => {
