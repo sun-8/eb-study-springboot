@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.web.mapper.MultiFileMapper">
+
+    <!-- 업로드 파일 저장 -->
+    <insert id="insertMultiFile" parameterType="com.study.web.model.MultiFileDTO">
+        INSERT INTO MULTI_FILE
+        (
+            FILE_ID,
+            FILE_NAME,
+            FILE_PATH,
+            FILE_SIZE,
+            FILE_TYPE,
+            FILE_EXTEND,
+            REG_DTTM,
+            MOD_DTTM
+        )
+        VALUES
+        (
+            #{fileId},
+            #{fileName},
+            #{filePath},
+            #{fileSize},
+            #{fileType},
+            #{fileExtend},
+            NOW(),
+            NULL
+        )
+    </insert>
+
+</mapper>

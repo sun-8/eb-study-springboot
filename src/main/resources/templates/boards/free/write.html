@@ -10,7 +10,8 @@
   <title>게시판 등록</title>
 </head>
 <body class="body">
-  <form id="frm" method="post" th:action="@{/boards/free/process}">
+  <form id="frm" method="post" th:action="@{/boards/free/process}"
+        enctype="multipart/form-data">
     <input type="hidden" id="process" name="p" value=""/>
     <table class="table">
       <tbody>
@@ -67,20 +68,20 @@
       </tr>
       <tr>
         <th class="left">
-          <label for="file1">파일첨부</label>
+          <label for="file1Info">파일첨부</label>
         </th>
         <td>
           <div class="mb5">
             <input class="input" type="text" id="file1Name" name="file1Name"/>
-            <input type="file" id="file1" name="file1"/>
+            <input type="file" id="file1Info" name="file1Info"/>
           </div>
           <div class="mb5">
             <input class="input" type="text" id="file2Name" name="file2Name"/>
-            <input type="file" id="file2" name="file2"/>
+            <input type="file" id="file2Info" name="file2Info"/>
           </div>
           <div>
             <input class="input" type="text" id="file3Name" name="file3Name"/>
-            <input type="file" id="file3" name="file3"/>
+            <input type="file" id="file3Info" name="file3Info"/>
           </div>
       </tr>
       </tbody>

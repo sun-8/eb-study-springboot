@@ -24,6 +24,10 @@
     border: 1px solid black;
 }
 
+input[type="file"] {
+    color: transparent; /* 파일명 숨김 */
+}
+
 /* display */
 
 .disIn{

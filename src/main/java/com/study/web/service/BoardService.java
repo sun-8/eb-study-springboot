@@ -3,14 +3,15 @@ package com.study.web.service;
 import com.study.util.CommonUtil;
 import com.study.web.mapper.BoardMapper;
 import com.study.web.model.BoardDTO;
+import com.study.web.model.MultiFileDTO;
 import com.study.web.model.PageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 @Service
@@ -19,6 +20,8 @@ public class BoardService {
 
     @Autowired
     private BoardMapper boardMapper;
+    @Autowired
+    private MultipartService multipartService;
 
     /**
      * 게시글 총 개수
@@ -73,10 +76,35 @@ public class BoardService {
      * @param boardDTO
      * @return
      */
-    public int insertBoard(BoardDTO boardDTO) {
+    public int insertBoard(BoardDTO boardDTO, Map<String, MultipartFile> fileMap) {
+
+        // 파일 업로드 및 값 셋팅
+        for(Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
+            MultipartFile file = entry.getValue();
+            try {
+                MultiFileDTO multiFileDTO = multipartService.upload(file);
+
+                if (multiFileDTO != null) {
+                    switch (entry.getKey()) {
+                        case "file1Info":
+                            boardDTO.setFile1(multiFileDTO.getFileId());
+                            break;
+                        case "file2Info":
+                            boardDTO.setFile2(multiFileDTO.getFileId());
+                            break;
+                        case "file3Info":
+                            boardDTO.setFile3(multiFileDTO.getFileId());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         int cnt = 0;
-
         // 유효성 검증
         if (!(CommonUtil.isEmpty(boardDTO.getCategoryId())
                 || CommonUtil.isEmpty(boardDTO.getUserName())

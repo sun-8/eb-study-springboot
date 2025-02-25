@@ -1,20 +1,19 @@
 package com.study.web.controller;
 
+import com.study.util.CommonUtil;
 import com.study.web.model.BoardDTO;
 import com.study.web.model.CategoryDTO;
 import com.study.web.model.PageDTO;
 import com.study.web.service.BoardService;
 import com.study.web.service.CategoryService;
-import com.study.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = {"/boards/free/*"})
@@ -80,14 +79,11 @@ public class BoardController {
     }
 
     @PostMapping(value = "process", params = "p=C")
-    public String process(@ModelAttribute BoardDTO boardDTO) {
+    public String process(@ModelAttribute BoardDTO boardDTO,
+                          @RequestParam Map<String, MultipartFile> fileMap) {
 
-        int insetCnt = boardService.insertBoard(boardDTO);
+        int insertCnt = boardService.insertBoard(boardDTO, fileMap);
 
-        if (insetCnt > 0) {
-            return "redirect:/boards/free/list";
-        } else {
-            return null;
-        }
+        return "redirect:/boards/free/list";
     }
 }
