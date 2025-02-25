@@ -1,4 +1,8 @@
 
+.body{
+    font-size: 15px;
+}
+
 /* 검색 조건 */
 .search{
     height: 30px;
@@ -21,10 +25,7 @@
 }
 
 .search .srchButton{
-    background-color: black;
-    color: white;
     width: 80px;
-    cursor: pointer;
 }
 
 /* 목록 */
@@ -70,8 +71,5 @@ tbody tr:hover{
 }
 
 .regButton{
-    background-color: black;
-    color: white;
     width: 100px;
-    cursor: pointer;
 }

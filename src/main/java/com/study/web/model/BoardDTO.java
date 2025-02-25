@@ -1,10 +1,8 @@
 package com.study.web.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class BoardDTO {
     private int id;
     private String categoryId;

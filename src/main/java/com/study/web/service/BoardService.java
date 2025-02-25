@@ -1,5 +1,6 @@
 package com.study.web.service;
 
+import com.study.util.CommonUtil;
 import com.study.web.mapper.BoardMapper;
 import com.study.web.model.BoardDTO;
 import com.study.web.model.PageDTO;
@@ -74,7 +75,16 @@ public class BoardService {
      */
     public int insertBoard(BoardDTO boardDTO) {
 
-        int cnt = boardMapper.insertBoard(boardDTO);
+        int cnt = 0;
+
+        // 유효성 검증
+        if (!(CommonUtil.isEmpty(boardDTO.getCategoryId())
+                || CommonUtil.isEmpty(boardDTO.getUserName())
+                || CommonUtil.isEmpty(boardDTO.getPassword())
+                || CommonUtil.isEmpty(boardDTO.getTitle())
+                || CommonUtil.isEmpty(boardDTO.getContents()))) {
+            cnt = boardMapper.insertBoard(boardDTO);
+        }
 
         return cnt;
     }

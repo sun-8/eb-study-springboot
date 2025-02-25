@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base/layout/default">
+<head>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <link rel="stylesheet" type="text/css"  href="/css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/boardWrite.css"/>
+  <title>게시판 등록</title>
+</head>
+<body class="body">
+  <form id="frm" method="post" th:action="@{/boards/free/process}">
+    <input type="hidden" id="process" name="p" value=""/>
+    <table class="table">
+      <tbody>
+      <tr>
+        <th class="left">
+          <label for="categoryId">카테고리 *</label>
+        </th>
+        <td>
+          <select class="select" id="categoryId" name="categoryId">
+            <option value="">카테고리 선택</option>
+            <option th:if="${not #lists.isEmpty(categoryList)}"
+                    th:each="item : ${categoryList}"
+                    th:value="${item.id}" th:text="${item.name}"></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th class="left">
+          <label for="userName">작성자 *</label>
+        </th>
+        <td>
+          <input class="input" type="text" id="userName" name="userName"
+                 placeholder="작성자를 입력하세요."/>
+        </td>
+      </tr>
+      <tr>
+        <th class="left">
+          <label for="password">비밀번호 *</label>
+        </th>
+        <td>
+          <input class="input" type="password" id="password" name="password"
+                 placeholder="비밀번호"/>
+          <input class="input" type="password" id="passwordChk" name="passwordChk"
+                 placeholder="비밀번호 확인"/>
+        </td>
+      </tr>
+      <tr>
+        <th class="left">
+          <label for="title">제목 *</label>
+        </th>
+        <td>
+          <input class="input" type="text" id="title" name="title"
+                 placeholder="제목을 입력하세요."/>
+        </td>
+      </tr>
+      <tr>
+        <th class="left">
+          <label for="contents">내용 *</label>
+        </th>
+        <td>
+          <textarea class="textarea" id="contents" name="contents"
+                    placeholder="내용을 입력하세요."></textarea>
+        </td>
+      </tr>
+      <tr>
+        <th class="left">
+          <label for="file1">파일첨부</label>
+        </th>
+        <td>
+          <div class="mb5">
+            <input class="input" type="text" id="file1Name" name="file1Name"/>
+            <input type="file" id="file1" name="file1"/>
+          </div>
+          <div class="mb5">
+            <input class="input" type="text" id="file2Name" name="file2Name"/>
+            <input type="file" id="file2" name="file2"/>
+          </div>
+          <div>
+            <input class="input" type="text" id="file3Name" name="file3Name"/>
+            <input type="file" id="file3" name="file3"/>
+          </div>
+      </tr>
+      </tbody>
+    </table>
+    <div class="mt20">
+      <div class="left">
+        <button class="button backBtn" id="backBtn">취소</button>
+      </div>
+      <div class="right">
+        <button class="button regBtn" id="regBtn">등록</button>
+      </div>
+    </div>
+  </form>
+
+  <script src="/js/boardWrite.js"></script>
+</body>
+</html>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public class BoardController {
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("boardList", boardList);
 
-        return "board/free/list";
+        return "boards/free/list";
     }
 
     /**
@@ -75,8 +76,18 @@ public class BoardController {
 
         model.addAttribute("categoryList", categoryList);
 
-        return "board/free/write";
+        return "boards/free/write";
     }
 
-    // todo. 등록 화면 개발 + 등록 처리 + 파일 첨부
+    @PostMapping(value = "process", params = "p=C")
+    public String process(@ModelAttribute BoardDTO boardDTO) {
+
+        int insetCnt = boardService.insertBoard(boardDTO);
+
+        if (insetCnt > 0) {
+            return "redirect:/boards/free/list";
+        } else {
+            return null;
+        }
+    }
 }

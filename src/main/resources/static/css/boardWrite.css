@@ -1,0 +1,47 @@
+
+.body{
+    font-size: 14px;
+}
+
+.table{
+    width: 100%;
+    border-collapse: collapse; /*셀 간격 제거*/
+}
+
+.table tr{
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.table th{
+    padding: 10px 20px;
+    width: 10%;
+    background-color: darkgray;
+}
+
+.table td{
+    padding: 10px;
+}
+
+.input{
+    width: 30%;
+}
+
+.select{
+    width: 30.4%;
+}
+
+.textarea{
+    width: 61.4%;
+    height: 100px;
+}
+
+.backBtn{
+    width: 100px;
+    background-color: darkgray;
+    color: black;
+}
+
+.regBtn{
+    width: 100px;
+}
