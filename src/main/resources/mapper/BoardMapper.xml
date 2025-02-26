@@ -141,7 +141,7 @@
     <update id="plusViews" parameterType="com.study.web.model.BoardDTO">
         UPDATE BOARD
         SET
-            VIEWS = #{views} + 1
+            VIEWS = VIEWS + 1
         WHERE ID = #{id}
     </update>
 </mapper>

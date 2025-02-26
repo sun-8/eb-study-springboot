@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css"  href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css"  href="/css/boardDetail.css"/>
+    <title>게시판 상세</title>
+</head>
+<body class="body">
+    <input type="hidden" id="key" name="key" th:value="${seq}">
+    <div class="mb50">
+        <div class="mb10">
+            <span>
+                작성자 : <span th:text="${boardDTO.userName}"></span>
+            </span>
+            <span class="float-r">
+                수정일시 : <span th:text="${#strings.defaultString(boardDTO.modDttm, '-')}"></span>
+            </span>
+            <span class="float-r mr20">
+                등록일시 : <span th:text="${#strings.defaultString(boardDTO.regDttm, '-')}"></span>
+            </span>
+        </div>
+
+        <div class="mb10">
+            <span class="font25">
+                <span th:text="${'[' + boardDTO.categoryName + ']'}"></span>
+                <span th:text="${boardDTO.title}"></span>
+            </span>
+            <span class="float-r">
+                조회수 : <span th:text="${boardDTO.views}"></span>
+            </span>
+        </div><hr>
+
+        <div class="mb10 m-hpx200">
+            <!--내용 작성시 줄바꿈까지 적용-->
+            <span th:text="${boardDTO.contents}" style="white-space: pre-wrap;"></span>
+        </div>
+        <div class="mb10">
+            <div class="mb10"><span>첨부파일 1</span></div>
+            <div class="mb10"><span>첨부파일 2</span></div>
+            <div class="mb10"><span>첨부파일 3</span></div>
+        </div>
+    </div>
+
+    <div class="commentBox">
+        <div id="commentList">
+
+        </div>
+        <div>
+            <div class="commentTxt">
+                <textarea class="regTextarea" placeholder="댓글을 입력해주세요."
+                          id="regTextarea" name="regTextarea"></textarea>
+            </div>
+            <div class="commentBtn">
+                <button class="regBtn" id="regBtn">등록</button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="mt20 center">
+        <button class="button listBtn" id="listBtn">목록</button>
+        <button class="button modBtn" id="modBtn">수정</button>
+        <button class="button delBtn" id="delBtn">삭제</button>
+    </div>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/boardDetail.js"></script>
+</body>
+</html>

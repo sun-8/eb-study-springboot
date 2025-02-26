@@ -14,6 +14,15 @@
     cursor: pointer;
 }
 
+.textarea{
+    padding: 6px;
+    margin: 0px 5px 0px 5px;
+    font-size: 14px;
+    border-radius: 0px;
+    border: 1px solid black;
+    resize: none;
+}
+
 .input,
 .textarea,
 .select{
@@ -38,6 +47,10 @@ input[type="file"] {
     display: inline-block;
 }
 
+.float-r{
+    float:right;
+}
+
 /* margin */
 
 .m20{
@@ -50,6 +63,18 @@ input[type="file"] {
 
 .mb5{
     margin-bottom: 5px;
+}
+
+.mb10{
+    margin-bottom: 10px;
+}
+
+.mb50{
+    margin-bottom: 50px;
+}
+
+.mr20{
+    margin-right: 20px;
 }
 
 .mbt5{
@@ -76,6 +101,18 @@ input[type="file"] {
 
 .txtRed{
     color: red;
+}
+
+.txtDarkslategrey{
+    color: darkslategrey;
+}
+
+.font25{
+    font-size: 25px;
+}
+
+.font12{
+    font-size: 12px
 }
 
 /* width 정의 */
@@ -114,4 +151,10 @@ input[type="file"] {
 
 .wper60{
     width: 60%;
+}
+
+/* height 정의 */
+
+.m-hpx200{
+    min-height: 200px;
 }

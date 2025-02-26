@@ -48,3 +48,14 @@ let regBtn = document.getElementById("regBtn");
 regBtn.addEventListener('click', (event) => {
    location.href="/boards/free/write";
 });
+
+// 게시글 상세 이동 기능
+let tr = document.querySelectorAll("tbody > tr");
+tr.forEach((v) => {
+    v.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        let seq = event.target.parentElement.dataset.key;
+        location.href="/boards/free/" + seq;
+    })
+})

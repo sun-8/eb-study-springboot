@@ -23,4 +23,10 @@ public class BoardDTO {
     private String srchRegDateEnd;
     private String srchCategory;
     private String srchWord;
+
+    public BoardDTO() {}
+
+    public BoardDTO(int id) {
+        this.id = id;
+    }
 }

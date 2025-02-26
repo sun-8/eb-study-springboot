@@ -3,9 +3,11 @@ package com.study.web.controller;
 import com.study.util.CommonUtil;
 import com.study.web.model.BoardDTO;
 import com.study.web.model.CategoryDTO;
+import com.study.web.model.CommentDTO;
 import com.study.web.model.PageDTO;
 import com.study.web.service.BoardService;
 import com.study.web.service.CategoryService;
+import com.study.web.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,8 @@ public class BoardController {
     private BoardService boardService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private CommentService commentService;
 
     /**
      * 게시판 목록 화면
@@ -61,6 +65,27 @@ public class BoardController {
         model.addAttribute("boardList", boardList);
 
         return "boards/free/list";
+    }
+
+    /**
+     * 게시판 상세 화면
+     * @param model
+     * @param seq
+     * @return
+     */
+    @GetMapping("{seq}")
+    public String detail(Model model,
+                         @PathVariable("seq") Integer seq) {
+
+        // 조회수 증가
+        int plusViews = boardService.plusViews(new BoardDTO(seq));
+        // 상세 조회
+        BoardDTO boardDTO = boardService.getBoard(new BoardDTO(seq));
+
+        model.addAttribute("boardDTO", boardDTO);
+        model.addAttribute("seq", seq);
+
+        return "boards/free/view";
     }
 
     /**
@@ -107,4 +132,33 @@ public class BoardController {
 
         return "redirect:/boards/free/list";
     }
+
+    /**
+     * 게시글에 대한 댓글 목록
+     * @param commentDTO
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("selectCommentList")
+    public List<CommentDTO> selectCommentList(@RequestBody CommentDTO commentDTO) {
+
+        List<CommentDTO> list = commentService.getCommentList(commentDTO);
+
+        return list;
+    }
+
+    /**
+     * 게시글에 대한 댓글 등록
+     * @param commentDTO
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("insertComment")
+    public CommentDTO insertComment(@RequestBody CommentDTO commentDTO) {
+
+        CommentDTO rtnDTO = commentService.insertComment(commentDTO);
+
+        return rtnDTO;
+    }
+
 }
