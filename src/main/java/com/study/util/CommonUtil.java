@@ -81,6 +81,17 @@ public class CommonUtil {
     }
 
     /**
+     * 현재 날짜를 format 형식으로 반환
+     * @param format
+     * @return
+     */
+    public static String localNowDate(String format) {
+        LocalDate localDate = LocalDate.now();
+        String now = localDate.format(dateFormat(localDate, format));
+        return now;
+    }
+
+    /**
      * String 타입의 주어진 날짜를 i년 뒤 날짜로 반환
      * @param str
      * @param i

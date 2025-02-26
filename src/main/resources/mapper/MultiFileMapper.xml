@@ -3,11 +3,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.web.mapper.MultiFileMapper">
 
+    <!-- 날짜별 파일 총 개수 -->
+    <select id="cntMultiFileList" parameterType="String">
+        SELECT COUNT(*) FROM MULTI_FILE
+        WHERE FILE_FOLDER = #{date}
+    </select>
+
     <!-- 업로드 파일 저장 -->
     <insert id="insertMultiFile" parameterType="com.study.web.model.MultiFileDTO">
         INSERT INTO MULTI_FILE
         (
             FILE_ID,
+            FILE_FOLDER,
             FILE_NAME,
             FILE_PATH,
             FILE_SIZE,
@@ -19,6 +26,7 @@
         VALUES
         (
             #{fileId},
+            #{fileFolder},
             #{fileName},
             #{filePath},
             #{fileSize},

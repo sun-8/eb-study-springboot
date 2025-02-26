@@ -6,6 +6,7 @@ import lombok.Data;
 public class MultiFileDTO {
 
     private String fileId;
+    private String fileFolder;
     private String fileName;
     private String filePath;
     private long fileSize;

@@ -7,6 +7,13 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MultiFileMapper {
 
     /**
+     * 날짜별 파일 총 개수
+     * @param date
+     * @return
+     */
+    public int cntMultiFileList(String date);
+
+    /**
      * 업로드 파일 저장
      * @param multiFileDTO
      * @return
