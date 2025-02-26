@@ -8,44 +8,71 @@ backBtn.addEventListener("click", (event) => {
     return false;
 })
 
-// 파일 업로드 시 이벤트
 let file1Info = document.getElementById("file1Info");
 let file2Info = document.getElementById("file2Info");
 let file3Info = document.getElementById("file3Info");
 
+// 파일 업로드 시 이벤트 - form submit
+// file1Info.addEventListener("change", (event) => {
+//     event.preventDefault();
+//
+//     let file1Name = document.getElementById("file1Name");
+//     file1Name.value = event.target.files[0].name;
+// })
+//
+// file2Info.addEventListener("change", (event) => {
+//     event.preventDefault();
+//
+//     let file2Name = document.getElementById("file2Name");
+//     file2Name.value = event.target.files[0].name;
+// })
+//
+// file3Info.addEventListener("change", (event) => {
+//     event.preventDefault();
+//
+//     let file3Name = document.getElementById("file3Name");
+//     file3Name.value = event.target.files[0].name;
+// })
+
+// 파일 업로드 시 이벤트 - js
 file1Info.addEventListener("change", (event) => {
     event.preventDefault();
 
     let file1Name = document.getElementById("file1Name");
-    file1Name.value = event.target.files[0].name;
+    let file1Id = document.getElementById("file1Id");
+    let obj = {
+        fileId : file1Id,
+        fileName : file1Name
+    }
+
+    fileUpload(event.target.files[0], obj);
 })
 
 file2Info.addEventListener("change", (event) => {
     event.preventDefault();
 
     let file2Name = document.getElementById("file2Name");
-    file2Name.value = event.target.files[0].name;
+    let file2Id = document.getElementById("file2Id");
+    let obj = {
+        fileId : file2Id,
+        fileName : file2Name
+    }
+
+    fileUpload(event.target.files[0], obj);
 })
 
 file3Info.addEventListener("change", (event) => {
     event.preventDefault();
 
     let file3Name = document.getElementById("file3Name");
-    file3Name.value = event.target.files[0].name;
-})
+    let file3Id = document.getElementById("file3Id");
+    let obj = {
+        fileId : file3Id,
+        fileName : file3Name
+    }
 
-// let file1Info = document.getElementById("file1Info");
-// file1Info.addEventListener("change", (event) => {
-//     event.preventDefault();
-//
-//     let file1 = document.getElementById("file1");
-//     let obj = {
-//         inputFile : event.target,
-//         originName : file1
-//     }
-//
-//     fileUpload(event.target.files[0], obj);
-// })
+    fileUpload(event.target.files[0], obj);
+})
 
 // 등록 버튼 이벤트
 let regBtn = document.getElementById("regBtn");

@@ -21,7 +21,7 @@ public class BoardService {
     @Autowired
     private BoardMapper boardMapper;
     @Autowired
-    private MultipartService multipartService;
+    private MultiFileService multiFileService;
 
     /**
      * 게시글 총 개수
@@ -72,7 +72,7 @@ public class BoardService {
     }
 
     /**
-     * 게시판 등록
+     * 게시판 등록 - form submit 에서 파일 업로드
      * @param boardDTO
      * @return
      */
@@ -82,7 +82,7 @@ public class BoardService {
         for(Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             MultipartFile file = entry.getValue();
             try {
-                MultiFileDTO multiFileDTO = multipartService.upload(file);
+                MultiFileDTO multiFileDTO = multiFileService.upload(file);
 
                 if (multiFileDTO != null) {
                     switch (entry.getKey()) {
@@ -102,6 +102,38 @@ public class BoardService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        int cnt = 0;
+        // 유효성 검증
+        if (!(CommonUtil.isEmpty(boardDTO.getCategoryId())
+                || CommonUtil.isEmpty(boardDTO.getUserName())
+                || CommonUtil.isEmpty(boardDTO.getPassword())
+                || CommonUtil.isEmpty(boardDTO.getTitle())
+                || CommonUtil.isEmpty(boardDTO.getContents()))) {
+            cnt = boardMapper.insertBoard(boardDTO);
+        }
+
+        return cnt;
+    }
+
+    /**
+     * 게시판 등록 - js 에서 파일 업로드
+     * @param boardDTO
+     * @param fileMap
+     * @return
+     */
+    public int insertBoard2(BoardDTO boardDTO, Map<String, String> fileMap) {
+
+        // 파일 업로드 한 값 셋팅
+        if (!CommonUtil.isEmpty(fileMap.get("file1Id"))) {
+            boardDTO.setFile1(fileMap.get("file1Id"));
+        }
+        if (!CommonUtil.isEmpty(fileMap.get("file2Id"))) {
+            boardDTO.setFile2(fileMap.get("file2Id"));
+        }
+        if (!CommonUtil.isEmpty(fileMap.get("file3Id"))) {
+            boardDTO.setFile3(fileMap.get("file3Id"));
         }
 
         int cnt = 0;

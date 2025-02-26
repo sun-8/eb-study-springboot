@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
 import java.util.UUID;
 
 @Service
-public class MultipartService {
+public class MultiFileService {
 
     @Value("${system.upload-path}")
     private String uploadPath;

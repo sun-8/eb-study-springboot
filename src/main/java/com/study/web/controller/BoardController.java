@@ -78,11 +78,32 @@ public class BoardController {
         return "boards/free/write";
     }
 
-    @PostMapping(value = "process", params = "p=C")
-    public String process(@ModelAttribute BoardDTO boardDTO,
-                          @RequestParam Map<String, MultipartFile> fileMap) {
+//    /**
+//     * 게시판 등록 처리 - form submit 에서 파일 업로드
+//     * @param boardDTO
+//     * @param fileMap
+//     * @return
+//     */
+//    @PostMapping(value = "process", params = "p=C")
+//    public String insertData(@ModelAttribute BoardDTO boardDTO,
+//                             @RequestParam Map<String, MultipartFile> fileMap) {
+//
+//        int insertCnt = boardService.insertBoard(boardDTO, fileMap);
+//
+//        return "redirect:/boards/free/list";
+//    }
 
-        int insertCnt = boardService.insertBoard(boardDTO, fileMap);
+    /**
+     * 게시판 등록 처리 - js 에서 파일 업로드
+     * @param boardDTO
+     * @param fileMap
+     * @return
+     */
+    @PostMapping(value = "process", params = "p=C")
+    public String insertData(@ModelAttribute BoardDTO boardDTO,
+                             @RequestParam Map<String, String> fileMap) {
+
+        int insertCnt = boardService.insertBoard2(boardDTO, fileMap);
 
         return "redirect:/boards/free/list";
     }

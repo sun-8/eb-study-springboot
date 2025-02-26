@@ -10,8 +10,7 @@
   <title>게시판 등록</title>
 </head>
 <body class="body">
-  <form id="frm" method="post" th:action="@{/boards/free/process}"
-        enctype="multipart/form-data">
+  <form id="frm" method="post" th:action="@{/boards/free/process}">
     <input type="hidden" id="process" name="p" value=""/>
     <table class="table">
       <tbody>
@@ -73,14 +72,18 @@
         <td>
           <div class="mb5">
             <input class="input" type="text" id="file1Name" name="file1Name"/>
+            <!-- js 에서 파일 업로드 처리를 위해 hidden 추가. type=file 값 변경 불가. -->
+            <input class="input" type="hidden" id="file1Id" name="file1Id"/>
             <input type="file" id="file1Info" name="file1Info"/>
           </div>
           <div class="mb5">
             <input class="input" type="text" id="file2Name" name="file2Name"/>
+            <input class="input" type="hidden" id="file2Id" name="file2Id"/>
             <input type="file" id="file2Info" name="file2Info"/>
           </div>
           <div>
             <input class="input" type="text" id="file3Name" name="file3Name"/>
+            <input class="input" type="hidden" id="file3Id" name="file3Id"/>
             <input type="file" id="file3Info" name="file3Info"/>
           </div>
       </tr>
@@ -96,6 +99,7 @@
     </div>
   </form>
 
+  <script src="/js/common.js"></script>
   <script src="/js/boardWrite.js"></script>
 </body>
 </html>
