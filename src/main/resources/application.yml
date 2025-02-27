@@ -17,4 +17,4 @@ mybatis:
     map-underscore-to-camel-case: true
 
 system:
-  upload-path: \\src\\main\\resources\\static\\files\\
+  upload-path: D:\\test\\files\\

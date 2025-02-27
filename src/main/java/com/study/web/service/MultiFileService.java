@@ -34,7 +34,7 @@ public class MultiFileService {
 
         String fileName = file.getOriginalFilename();
         String fileFolder = CommonUtil.localNowDate("yyyyMMdd");
-        String filePath = System.getProperty("user.dir") + uploadPath + fileFolder;
+        String filePath = uploadPath + fileFolder;
         // 오늘일자 폴더 없으면 생성
         File filePathFolder = new File(filePath);
         if (!filePathFolder.exists()) {
