@@ -14,6 +14,13 @@ public interface MultiFileMapper {
     public int cntMultiFileList(String date);
 
     /**
+     * 파일 정보 조회
+     * @param multiFileDTO
+     * @return
+     */
+    public MultiFileDTO selectMultiFile(MultiFileDTO multiFileDTO);
+
+    /**
      * 업로드 파일 저장
      * @param multiFileDTO
      * @return

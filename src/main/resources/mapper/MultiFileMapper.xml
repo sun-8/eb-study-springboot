@@ -9,6 +9,22 @@
         WHERE FILE_FOLDER = #{date}
     </select>
 
+    <!-- 파일 조회 -->
+    <select id="selectMultiFile" parameterType="com.study.web.model.MultiFileDTO">
+        SELECT
+            FILE_ID,
+            FILE_FOLDER,
+            FILE_NAME,
+            FILE_PATH,
+            FILE_SIZE,
+            FILE_TYPE,
+            FILE_EXTEND,
+            REG_DTTM,
+            MOD_DTTM
+        FROM MULTI_FILE
+        WHERE FILE_ID = #{fileId}
+    </select>
+
     <!-- 업로드 파일 저장 -->
     <insert id="insertMultiFile" parameterType="com.study.web.model.MultiFileDTO">
         INSERT INTO MULTI_FILE

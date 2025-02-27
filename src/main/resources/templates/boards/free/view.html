@@ -8,7 +8,7 @@
     <title>게시판 상세</title>
 </head>
 <body class="body">
-    <input type="hidden" id="key" name="key" th:value="${seq}">
+    <input type="hidden" id="key" name="key" th:value="${boardDTO.id}">
     <div class="mb50">
         <div class="mb10">
             <span>
@@ -37,9 +37,18 @@
             <span th:text="${boardDTO.contents}" style="white-space: pre-wrap;"></span>
         </div>
         <div class="mb10">
-            <div class="mb10"><span>첨부파일 1</span></div>
-            <div class="mb10"><span>첨부파일 2</span></div>
-            <div class="mb10"><span>첨부파일 3</span></div>
+            <div class="mb10" th:if="${not #strings.isEmpty(boardDTO.file1)}">
+                <a class="fas fa-download download" href="javascript:void(0)"
+                   th:data-file="${boardDTO.file1}">[[${file1Info.fileName}]]</a>
+            </div>
+            <div class="mb10" th:if="${not #strings.isEmpty(boardDTO.file2)}">
+                <a class="fas fa-download download" href="javascript:void(0)"
+                   th:data-file="${boardDTO.file2}">[[${file2Info.fileName}]]</a>
+            </div>
+            <div class="mb10" th:if="${not #strings.isEmpty(boardDTO.file3)}">
+                <a class="fas fa-download download" href="javascript:void(0)"
+                   th:data-file="${boardDTO.file3}">[[${file3Info.fileName}]]</a>
+            </div>
         </div>
     </div>
 

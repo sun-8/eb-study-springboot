@@ -3,6 +3,17 @@ let key = document.getElementById("key");
 // 댓글 목록 출력
 selectCommentList(key.value);
 
+// 파일 다운로드 이벤트
+let download = document.querySelectorAll(".download");
+download.forEach((v) => {
+   v.addEventListener("click", (event) => {
+       event.preventDefault();
+
+       let fileId = event.target.dataset.file;
+       location.href = "/download?fileId=" + fileId;
+   })
+});
+
 // 댓글 등록 버튼 이벤트
 let regBtn = document.getElementById("regBtn");
 regBtn.addEventListener("click", (event) => {

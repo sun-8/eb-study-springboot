@@ -3,7 +3,10 @@ package com.study.web.controller;
 import com.study.web.model.MultiFileDTO;
 import com.study.web.service.MultiFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,5 +33,19 @@ public class MultiFileController {
         }
 
         return multiFileDTO;
+    }
+
+    @ResponseBody
+    @GetMapping("/download")
+    public ResponseEntity<Resource> download(@RequestParam("fileId") String fileId) {
+
+        ResponseEntity<Resource> rtn = null;
+        try {
+            rtn = multiFileService.download(fileId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return rtn;
     }
 }

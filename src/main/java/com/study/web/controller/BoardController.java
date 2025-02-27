@@ -1,13 +1,11 @@
 package com.study.web.controller;
 
 import com.study.util.CommonUtil;
-import com.study.web.model.BoardDTO;
-import com.study.web.model.CategoryDTO;
-import com.study.web.model.CommentDTO;
-import com.study.web.model.PageDTO;
+import com.study.web.model.*;
 import com.study.web.service.BoardService;
 import com.study.web.service.CategoryService;
 import com.study.web.service.CommentService;
+import com.study.web.service.MultiFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +25,8 @@ public class BoardController {
     private CategoryService categoryService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private MultiFileService multiFileService;
 
     /**
      * 게시판 목록 화면
@@ -81,9 +81,21 @@ public class BoardController {
         int plusViews = boardService.plusViews(new BoardDTO(seq));
         // 상세 조회
         BoardDTO boardDTO = boardService.getBoard(new BoardDTO(seq));
+        // 파일 정보
+        if (!CommonUtil.isEmpty(boardDTO.getFile1())) {
+            MultiFileDTO file1Info = multiFileService.getMultiFile(new MultiFileDTO(boardDTO.getFile1()));
+            model.addAttribute("file1Info", file1Info);
+        }
+        if (!CommonUtil.isEmpty(boardDTO.getFile2())) {
+            MultiFileDTO file2Info = multiFileService.getMultiFile(new MultiFileDTO(boardDTO.getFile2()));
+            model.addAttribute("file2Info", file2Info);
+        }
+        if (!CommonUtil.isEmpty(boardDTO.getFile3())) {
+            MultiFileDTO file3Info = multiFileService.getMultiFile(new MultiFileDTO(boardDTO.getFile3()));
+            model.addAttribute("file3Info", file3Info);
+        }
 
         model.addAttribute("boardDTO", boardDTO);
-        model.addAttribute("seq", seq);
 
         return "boards/free/view";
     }
