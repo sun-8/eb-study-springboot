@@ -33,15 +33,12 @@ async function fileUpload(file, obj) {
     formData.append("file", file);
 
     try {
-        let xhr = await fetch('/upload', {
+        const fileData = await fetch('/upload', {
             method: 'POST',
             body: formData,
-        })
+        });
 
-        if (!xhr) throw new Error('오류!!!');
-
-        let result = await xhr.json();
-
+        const result = await fileData.json();
         obj.fileName.value = result.fileName;
         obj.fileId.value = result.fileId;
 

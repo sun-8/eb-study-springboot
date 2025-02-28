@@ -1,13 +1,13 @@
 
 // 검색 기능
-let searchBtn = document.getElementById("searchBtn");
+const searchBtn = document.getElementById("searchBtn");
 searchBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
-    let form = document.getElementById("srchForm");
-    let nowPage = document.getElementById("nowPage");
-    let srchRegDateStart = document.getElementById("srchRegDateStart");
-    let srchRegDateEnd = document.getElementById("srchRegDateEnd");
+    const form = document.getElementById("srchForm");
+    const nowPage = document.getElementById("nowPage");
+    const srchRegDateStart = document.getElementById("srchRegDateStart");
+    const srchRegDateEnd = document.getElementById("srchRegDateEnd");
 
     // 검색조건 적용 후 검색 시 페이지 초기화
     nowPage.value = 1;
@@ -21,15 +21,15 @@ searchBtn.addEventListener("click", (event) => {
 });
 
 // 페이지 이동 기능
-let pageLi = document.querySelectorAll("#page > li");
+const pageLi = document.querySelectorAll("#page > li");
 pageLi.forEach((v)=> {
     v.addEventListener('click',(event)=> {
         event.preventDefault();
 
-        let form = document.getElementById("srchForm");
-        let nowPage = document.getElementById("nowPage");
-        let startPage = document.getElementById("startPage");
-        let endPage = document.getElementById("endPage");
+        const form = document.getElementById("srchForm");
+        const nowPage = document.getElementById("nowPage");
+        const startPage = document.getElementById("startPage");
+        const endPage = document.getElementById("endPage");
 
         if (v.id === "goBefore") { // value가 startPage보다 작으면 startPage로
             nowPage.value = (v.value < startPage.value) ? startPage.value : v.value;
@@ -44,18 +44,20 @@ pageLi.forEach((v)=> {
 });
 
 // 등록버튼 이동 기능
-let regBtn = document.getElementById("regBtn");
+const regBtn = document.getElementById("regBtn");
 regBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+
    location.href="/boards/free/write";
 });
 
 // 게시글 상세 이동 기능
-let tr = document.querySelectorAll("tbody > tr");
+const tr = document.querySelectorAll("tbody > tr");
 tr.forEach((v) => {
     v.addEventListener("click", (event) => {
         event.preventDefault();
 
-        let seq = event.target.parentElement.dataset.key;
+        const seq = event.target.parentElement.dataset.key;
         location.href="/boards/free/" + seq;
     })
 })

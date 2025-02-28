@@ -1,31 +1,31 @@
 
-let key = document.getElementById("key");
+const key = document.getElementById("key");
 // 댓글 목록 출력
 selectCommentList(key.value);
 
 // 파일 다운로드 이벤트
-let download = document.querySelectorAll(".download");
+const download = document.querySelectorAll(".download");
 download.forEach((v) => {
    v.addEventListener("click", (event) => {
        event.preventDefault();
 
-       let fileId = event.target.dataset.file;
+       const fileId = event.target.dataset.file;
        location.href = "/download?fileId=" + fileId;
    })
 });
 
 // 댓글 등록 버튼 이벤트
-let regBtn = document.getElementById("regBtn");
+const regBtn = document.getElementById("regBtn");
 regBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
-    let regTextarea = document.getElementById("regTextarea");
+    const regTextarea = document.getElementById("regTextarea");
 
     if (regTextarea.value === "") {
         alert('댓글을 입력해 주세요.');
         return false;
     } else {
-        let obj = {
+        const obj = {
             id : key,
             comments : regTextarea
         }
@@ -34,7 +34,7 @@ regBtn.addEventListener("click", (event) => {
 })
 
 // 목록 버튼 이벤트
-let listBtn = document.getElementById("listBtn");
+const listBtn = document.getElementById("listBtn");
 listBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
@@ -42,7 +42,7 @@ listBtn.addEventListener("click", (event) => {
 })
 
 // 수정 버튼 이벤트
-let modBtn = document.getElementById("modBtn");
+const modBtn = document.getElementById("modBtn");
 modBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
@@ -59,22 +59,15 @@ delBtn.addEventListener("click", (event) => {
 // 댓글 목록 출력
 async function selectCommentList(key) {
     try {
-        let xhr = await fetch('/boards/free/selectCommentList', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({"id": key}),
+        const commentData = await fetch('/boards/free/selectCommentList?id=' + key, {
+            method: 'GET',
         })
+        const result = await commentData.json();
 
-        if (!xhr) throw new Error('오류!!!');
-
-        let result = await xhr.json();
-
-        let commentList = document.getElementById("commentList");
+        const commentList = document.getElementById("commentList");
         // 기존 댓글 목록 제거
         commentList.textContent = '';
-        let list = [];
+        const list = [];
 
         result.forEach((item, idx) => {
             list.push(`
@@ -93,9 +86,8 @@ async function selectCommentList(key) {
 
 // 댓글 등록 처리
 async function insertComment(obj) {
-
     try {
-        let xhr = await fetch('/boards/free/insertComment', {
+        const commentData = await fetch('/boards/free/insertComment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -105,10 +97,7 @@ async function insertComment(obj) {
                 "comments": obj.comments.value
             }),
         })
-
-        if (!xhr) throw new Error('오류!!!');
-
-        let result = await xhr.json();
+        const result = await commentData.json();
 
         // 댓글 입력창 초기화
         obj.comments.value = "";

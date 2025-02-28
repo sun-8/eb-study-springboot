@@ -147,14 +147,14 @@ public class BoardController {
 
     /**
      * 게시글에 대한 댓글 목록
-     * @param commentDTO
+     * @param key
      * @return
      */
     @ResponseBody
-    @PostMapping("selectCommentList")
-    public List<CommentDTO> selectCommentList(@RequestBody CommentDTO commentDTO) {
+    @GetMapping("selectCommentList")
+    public List<CommentDTO> selectCommentList(@RequestParam("id") String key) {
 
-        List<CommentDTO> list = commentService.getCommentList(commentDTO);
+        List<CommentDTO> list = commentService.getCommentList(new CommentDTO(Integer.parseInt(key)));
 
         return list;
     }

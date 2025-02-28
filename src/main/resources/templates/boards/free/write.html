@@ -26,6 +26,7 @@
                     th:each="item : ${categoryList}"
                     th:value="${item.id}" th:text="${item.name}"></option>
           </select>
+          <span id="categoryError" class="txtRed"></span>
         </td>
       </tr>
       <tr>
@@ -35,6 +36,7 @@
         <td>
           <input class="input" type="text" id="userName" name="userName"
                  placeholder="작성자를 입력하세요."/>
+          <span id="userNameError" class="txtRed"></span>
         </td>
       </tr>
       <tr>
@@ -46,6 +48,7 @@
                  placeholder="비밀번호"/>
           <input class="input" type="password" id="passwordChk" name="passwordChk"
                  placeholder="비밀번호 확인"/>
+          <span id="passwordError" class="txtRed"></span>
         </td>
       </tr>
       <tr>
@@ -55,6 +58,7 @@
         <td>
           <input class="input" type="text" id="title" name="title"
                  placeholder="제목을 입력하세요."/>
+          <span id="titleError" class="txtRed"></span>
         </td>
       </tr>
       <tr>
@@ -64,6 +68,7 @@
         <td>
           <textarea class="textarea" id="contents" name="contents"
                     placeholder="내용을 입력하세요."></textarea>
+          <span id="contentsError" class="txtRed"></span>
         </td>
       </tr>
       <tr>
