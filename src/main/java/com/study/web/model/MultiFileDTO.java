@@ -1,8 +1,10 @@
 package com.study.web.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class MultiFileDTO {
 
     private String fileId;
@@ -14,8 +16,6 @@ public class MultiFileDTO {
     private String fileExtend;
     private String regDttm;
     private String modDttm;
-
-    public MultiFileDTO() {}
 
     public MultiFileDTO(String fileId) {
         this.fileId = fileId;

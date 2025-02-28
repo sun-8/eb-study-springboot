@@ -4,7 +4,9 @@
 <mapper namespace="com.study.web.mapper.CommentMapper">
 
     <!-- 게시글에 대한 댓글 목록 -->
-    <select id="selectList" resultType="com.study.web.model.CommentDTO">
+    <select id="selectList"
+            resultType="com.study.web.model.CommentDTO"
+            parameterType="com.study.web.model.CommentDTO">
         SELECT
             ID,
             REG_DTTM,
@@ -15,7 +17,8 @@
     </select>
 
     <!-- 게시글에 대한 댓글 등록 -->
-    <insert id="insertBoard" parameterType="com.study.web.model.CommentDTO">
+    <insert id="insertBoard"
+            parameterType="com.study.web.model.CommentDTO">
         INSERT INTO COMMENT
         (
             ID,

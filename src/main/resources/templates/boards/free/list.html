@@ -2,63 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="base/layout/default">
-<head>
+
+<th:block layout:fragment="css">
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-  <link rel="stylesheet" type="text/css"  href="/css/common.css"/>
-  <link rel="stylesheet" type="text/css" href="/css/boardList.css"/>
-  <title>게시판 목록</title>
-</head>
-<body class="body">
-<div class="search">
-  <form id="srchForm" method="get" th:action="@{/boards/free/list}">
-    <input type="hidden" name="nowPage" id="nowPage" th:value="${pageDTO.nowPage}">
-    <input type="hidden" name="startPage" id="startPage" th:value="${pageDTO.startPage}">
-    <input type="hidden" name="endPage" id="endPage" th:value="${pageDTO.endPage}">
+  <link rel="stylesheet" type="text/css"  th:href="@{/css/common.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/boardList.css}"/>
+</th:block>
 
-    <label for="srchRegDateStart">등록일</label>
-    <input type="date" name="srchRegDateStart" id="srchRegDateStart"
-           class="input srchDateInput" max="9999-12-31" th:value="${srchBoardDTO.srchRegDateStart}">
-    ~
-    <input type="date" name="srchRegDateEnd" id="srchRegDateEnd"
-           class="input srchDateInput" max="9999-12-31" th:value="${srchBoardDTO.srchRegDateEnd}">
-    <div class="disIn m20"></div>
+<section layout:fragment="body" class="body">
+  <div class="search">
+    <form id="srchForm" method="get" th:action="@{/boards/free/list}">
+      <input type="hidden" name="nowPage" id="nowPage" th:value="${pageDTO.nowPage}">
+      <input type="hidden" name="startPage" id="startPage" th:value="${pageDTO.startPage}">
+      <input type="hidden" name="endPage" id="endPage" th:value="${pageDTO.endPage}">
 
-    <select class="select srchSelect" name="srchCategory">
-      <option value="" selected>카테고리 선택</option>
-      <option th:if="${not #lists.isEmpty(categoryList)}" th:each="item : ${categoryList}"
-             th:value="${item.id}" th:text="${item.name}"
-             th:selected="${#strings.equals(item.id, srchBoardDTO.srchCategory)}"></option>
-    </select>
+      <label for="srchRegDateStart">등록일</label>
+      <input type="date" name="srchRegDateStart" id="srchRegDateStart"
+             class="input srchDateInput" max="9999-12-31" th:value="${srchBoardDTO.srchRegDateStart}">
+      ~
+      <input type="date" name="srchRegDateEnd" id="srchRegDateEnd"
+             class="input srchDateInput" max="9999-12-31" th:value="${srchBoardDTO.srchRegDateEnd}">
+      <div class="disIn m20"></div>
 
-    <input type="text" name="srchWord" id="srchWord"
-           class="input srchWordInput" placeholder="검색어를 입력해 주세요. (제목+작성자+내용)"
-           th:value="${srchBoardDTO.srchWord}">
-    <div class="disIn m20"></div>
+      <select class="select srchSelect" name="srchCategory">
+        <option value="" selected>카테고리 선택</option>
+        <option th:if="${not #lists.isEmpty(categoryList)}" th:each="item : ${categoryList}"
+                th:value="${item.id}" th:text="${item.name}"
+                th:selected="${#strings.equals(item.id, srchBoardDTO.srchCategory)}"></option>
+      </select>
 
-    <button class="button srchButton" id="searchBtn">검색</button>
-  </form>
-</div>
-<div class="list">
+      <input type="text" name="srchWord" id="srchWord"
+             class="input srchWordInput" placeholder="검색어를 입력해 주세요. (제목+작성자+내용)"
+             th:value="${srchBoardDTO.srchWord}">
+      <div class="disIn m20"></div>
+
+      <button class="button srchButton" id="searchBtn">검색</button>
+    </form>
+  </div>
+  <div class="list">
   <span>
     총 <span th:text="${pageDTO.dataCnt}"></span>건
   </span>
-  <table class="table">
-    <thead>
-    <tr>
-      <th class="wper7">카테고리</th>
-      <th class="wper3"></th>
-      <th class="wper60">제목</th>
-      <th class="wper5">작성자</th>
-      <th class="wper5">조회수</th>
-      <th class="wper10">등록 일시</th>
-      <th class="wper10">수정 일시</th>
-    </tr>
-    </thead>
-    <tbody>
+    <table class="table">
+      <thead>
+      <tr>
+        <th class="wper7">카테고리</th>
+        <th class="wper3"></th>
+        <th class="wper60">제목</th>
+        <th class="wper5">작성자</th>
+        <th class="wper5">조회수</th>
+        <th class="wper10">등록 일시</th>
+        <th class="wper10">수정 일시</th>
+      </tr>
+      </thead>
+      <tbody>
       <tr th:if="${not #lists.isEmpty(boardList)}"
-        th:each="list : ${boardList}"
-        th:data-key="${list.id}">
+          th:each="list : ${boardList}"
+          th:data-key="${list.id}">
         <td class="center" th:text="${list.categoryName}"></td>
         <td class="center">
           <th:block th:if="${not #strings.isEmpty(list.file1) || not #strings.isEmpty(list.file2) || not #strings.isEmpty(list.file3)}">
@@ -72,66 +73,24 @@
         <td class="center" th:text="${#strings.defaultString(list.regDttm, '-')}"></td>
         <td class="center" th:text="${#strings.defaultString(list.modDttm, '-')}"></td>
       </tr>
-    </tbody>
-  </table>
-</div>
-<div>
-  <div class="center mt20">
-    <ul id="page">
-      <!--화면에 보여줘야 하는 갯수보다 페이지가 많으면-->
-      <th:block th:if="${pageDTO.endPage > pageDTO.lookPageCnt}">
-        <li class="disInBl mbt5" id="goFirst" th:value="${pageDTO.startPage}"><<</li>
-        <li class="disInBl mbt5" id="goBefore" th:value="${pageDTO.nowPage - 1}"><</li>
-
-        <!-- 1 2 3 ... 10 -->
-        <!-- todo. 세 조건에서 첫번째에 위치하는 조건만 th:block이 적용 안됨. 각 요소에 조건을 주어 처리.-->
-        <li th:if="${pageDTO.nowPage < pageDTO.lookPageCnt}"
-            th:each="num : ${#numbers.sequence(pageDTO.startPage,pageDTO.lookPageCnt)}"
-            th:value="${num}" th:text="${num}"
-            class="disInBl mbt5" th:classappend="${num == pageDTO.nowPage} ? txtRed : ''"></li>
-        <span th:if="${pageDTO.nowPage < pageDTO.lookPageCnt}">...</span>
-        <li th:if="${pageDTO.nowPage < pageDTO.lookPageCnt}"
-            class="disInBl mbt5" th:value="${pageDTO.endPage}" th:text="${pageDTO.endPage}"></li>
-        <!-- 1 ... 8 9 10 -->
-        <th:block th:if="${pageDTO.nowPage + 1 >= pageDTO.endPage}">
-          <li class="disInBl mbt5" th:value="${pageDTO.startPage}" th:text="${pageDTO.startPage}"></li>
-          ...
-          <li th:each="num : ${#numbers.sequence(pageDTO.endPage - pageDTO.lookPageCnt + 1,pageDTO.endPage)}"
-              th:value="${num}" th:text="${num}"
-              class="disInBl mbt5" th:classappend="${num == pageDTO.nowPage} ? txtRed : ''"></li>
-        </th:block>
-        <!-- 1 ... 4 5 6 ... 10 -->
-        <th:block th:if="${!(pageDTO.nowPage < pageDTO.lookPageCnt) && !(pageDTO.nowPage + 1 >= pageDTO.endPage)}">
-          <li class="disInBl mbt5" th:value="${pageDTO.startPage}" th:text="${pageDTO.startPage}"></li>
-          ...
-          <li th:each="num : ${#numbers.sequence(pageDTO.nowPage - 1,pageDTO.nowPage + 1)}"
-              th:value="${num}" th:text="${num}"
-              class="disInBl mbt5" th:classappend="${num == pageDTO.nowPage} ? txtRed : ''"></li>
-          ...
-          <li class="disInBl mbt5" th:value="${pageDTO.endPage}" th:text="${pageDTO.endPage}"></li>
-        </th:block>
-
-        <li class="disInBl mbt5" id="goAfter" th:value="${pageDTO.nowPage + 1}">></li>
-        <li class="disInBl mbt5" id="goLast" th:value="${pageDTO.endPage}">>></li>
-      </th:block>
-      <!-- 화면에 보여줘야 하는 갯수보다 페이지가 많지 않으면-->
-      <th:block th:unless="${pageDTO.endPage > pageDTO.lookPageCnt}">
-        <li class="disInBl mbt5" id="goBefore" th:value="${pageDTO.nowPage - 1}"><</li>
-
-        <li th:each="num : ${#numbers.sequence(pageDTO.startPage,pageDTO.endPage)}"
-            th:value="${num}" th:text="${num}"
-            class="disInBl mbt5" th:classappend="${num == pageDTO.nowPage} ? txtRed : ''"></li>
-
-        <li class="disInBl mbt5" id="goAfter" th:value="${pageDTO.nowPage + 1}">></li>
-      </th:block>
-    </ul>
+      </tbody>
+    </table>
   </div>
-  <div class="right mt20">
-    <button class="button regButton" id="regBtn">등록</button>
+
+  <div>
+    <!-- 페이지네이션 -->
+    <div class="center mt20">
+      <ul id="page" th:replace="base/fragments/paging :: pagingFragment"></ul>
+    </div>
+    <div class="right mt20">
+      <button class="button regButton" id="regBtn">등록</button>
+    </div>
   </div>
-</div>
+</section>
 
+<th:block th:fragment="script">
+  <script th:src="@{/js/common.js}"></script>
+  <script th:src="@{/js/boardList.js}"></script>
+</th:block>
 
-<script src="/js/boardList.js"></script>
-</body>
 </html>

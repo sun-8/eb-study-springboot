@@ -4,7 +4,8 @@
 <mapper namespace="com.study.web.mapper.CategoryMapper">
 
     <!-- 카테고리 목록 -->
-    <select id="selectList" resultType="com.study.web.model.CategoryDTO">
+    <select id="selectList"
+            resultType="com.study.web.model.CategoryDTO">
         SELECT
             ID,
             NAME

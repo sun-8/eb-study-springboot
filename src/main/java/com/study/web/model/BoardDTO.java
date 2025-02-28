@@ -1,8 +1,10 @@
 package com.study.web.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class BoardDTO {
     private int id;
     private String categoryId;
@@ -23,8 +25,6 @@ public class BoardDTO {
     private String srchRegDateEnd;
     private String srchCategory;
     private String srchWord;
-
-    public BoardDTO() {}
 
     public BoardDTO(int id) {
         this.id = id;

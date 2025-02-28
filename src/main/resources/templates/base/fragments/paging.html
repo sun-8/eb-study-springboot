@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<ul id="page" th:fragment="pagingFragment">
+    <!--화면에 보여줘야 하는 갯수보다 페이지가 많으면-->
+    <th:block th:if="${pageDTO.endPage > pageDTO.lookPageCnt}">
+        <li class="disInBl mbt5" id="goFirst" th:value="${pageDTO.startPage}"><<</li>
+        <li class="disInBl mbt5" id="goBefore" th:value="${pageDTO.nowPage - 1}"><</li>
+
+        <!-- 1 2 3 ... 10 -->
+        <!-- todo. 세 조건에서 첫번째에 위치하는 조건만 th:block이 적용 안됨. 각 요소에 조건을 주어 처리.-->
+        <li th:if="${pageDTO.nowPage < pageDTO.lookPageCnt}"
+            th:each="num : ${#numbers.sequence(pageDTO.startPage,pageDTO.lookPageCnt)}"
+            th:value="${num}" th:text="${num}"
+            class="disInBl mbt5" th:classappend="${num == pageDTO.nowPage} ? txtRed : ''"></li>
+        <span th:if="${pageDTO.nowPage < pageDTO.lookPageCnt}">...</span>
+        <li th:if="${pageDTO.nowPage < pageDTO.lookPageCnt}"
+            class="disInBl mbt5" th:value="${pageDTO.endPage}" th:text="${pageDTO.endPage}"></li>
+        <!-- 1 ... 8 9 10 -->
+        <th:block th:if="${pageDTO.nowPage + 1 >= pageDTO.endPage}">
+            <li class="disInBl mbt5" th:value="${pageDTO.startPage}" th:text="${pageDTO.startPage}"></li>
+            ...
+            <li th:each="num : ${#numbers.sequence(pageDTO.endPage - pageDTO.lookPageCnt + 1,pageDTO.endPage)}"
+                th:value="${num}" th:text="${num}"
+                class="disInBl mbt5" th:classappend="${num == pageDTO.nowPage} ? txtRed : ''"></li>
+        </th:block>
+        <!-- 1 ... 4 5 6 ... 10 -->
+        <th:block th:if="${!(pageDTO.nowPage < pageDTO.lookPageCnt) && !(pageDTO.nowPage + 1 >= pageDTO.endPage)}">
+            <li class="disInBl mbt5" th:value="${pageDTO.startPage}" th:text="${pageDTO.startPage}"></li>
+            ...
+            <li th:each="num : ${#numbers.sequence(pageDTO.nowPage - 1,pageDTO.nowPage + 1)}"
+                th:value="${num}" th:text="${num}"
+                class="disInBl mbt5" th:classappend="${num == pageDTO.nowPage} ? txtRed : ''"></li>
+            ...
+            <li class="disInBl mbt5" th:value="${pageDTO.endPage}" th:text="${pageDTO.endPage}"></li>
+        </th:block>
+
+        <li class="disInBl mbt5" id="goAfter" th:value="${pageDTO.nowPage + 1}">></li>
+        <li class="disInBl mbt5" id="goLast" th:value="${pageDTO.endPage}">>></li>
+    </th:block>
+    <!-- 화면에 보여줘야 하는 갯수보다 페이지가 많지 않으면-->
+    <th:block th:unless="${pageDTO.endPage > pageDTO.lookPageCnt}">
+        <li class="disInBl mbt5" id="goBefore" th:value="${pageDTO.nowPage - 1}"><</li>
+
+        <li th:each="num : ${#numbers.sequence(pageDTO.startPage,pageDTO.endPage)}"
+            th:value="${num}" th:text="${num}"
+            class="disInBl mbt5" th:classappend="${num == pageDTO.nowPage} ? txtRed : ''"></li>
+
+        <li class="disInBl mbt5" id="goAfter" th:value="${pageDTO.nowPage + 1}">></li>
+    </th:block>
+</ul>
+
+</html>

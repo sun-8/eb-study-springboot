@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base/layout/default">
+
+<th:block layout:fragment="css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-    <link rel="stylesheet" type="text/css"  href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css"  href="/css/boardDetail.css"/>
-    <title>게시판 상세</title>
-</head>
-<body class="body">
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/boardDetail.css}"/>
+</th:block>
+
+<section layout:fragment="body" class="body">
     <input type="hidden" id="key" name="key" th:value="${boardDTO.id}">
     <div class="mb50">
         <div class="mb10">
@@ -74,7 +77,10 @@
         <button class="button delBtn" id="delBtn">삭제</button>
     </div>
 
-    <script src="/js/common.js"></script>
-    <script src="/js/boardDetail.js"></script>
-</body>
+</section>
+
+<th:block th:fragment="script">
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/boardDetail.js}"></script>
+</th:block>
 </html>

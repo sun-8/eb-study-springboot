@@ -20,6 +20,11 @@ public class MultiFileController {
     @Autowired
     private MultiFileService multiFileService;
 
+    /**
+     * 파일 업로드
+     * @param file
+     * @return
+     */
     @ResponseBody
     @PostMapping("/upload")
     public MultiFileDTO upload(@RequestParam("file") MultipartFile file) {
@@ -35,6 +40,11 @@ public class MultiFileController {
         return multiFileDTO;
     }
 
+    /**
+     * 파일 다운로드
+     * @param fileId
+     * @return
+     */
     @ResponseBody
     @GetMapping("/download")
     public ResponseEntity<Resource> download(@RequestParam("fileId") String fileId) {

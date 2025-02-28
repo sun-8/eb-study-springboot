@@ -9,7 +9,9 @@
     </select>
 
     <!-- 게시글 총 개수 (검색조건) -->
-    <select id="selectCnt" resultType="int" parameterType="com.study.web.model.BoardDTO">
+    <select id="selectCnt"
+            resultType="int"
+            parameterType="com.study.web.model.BoardDTO">
         SELECT COUNT(*) FROM BOARD
         WHERE 1=1
         <if test="srchRegDateStart != null and srchRegDateStart != ''">
@@ -28,7 +30,8 @@
     </select>
 
     <!-- 게시글 목록 조회 (검색조건, 페이징) -->
-    <select id="selectList" resultType="com.study.web.model.BoardDTO">
+    <select id="selectList"
+            resultType="com.study.web.model.BoardDTO">
         SELECT
             ID,
             CATEGORY_ID,
@@ -63,7 +66,9 @@
     </select>
 
     <!-- 게시글 조회 -->
-    <select id="selectBoard" resultType="com.study.web.model.BoardDTO">
+    <select id="selectBoard"
+            resultType="com.study.web.model.BoardDTO"
+            parameterType="com.study.web.model.BoardDTO">
         SELECT
             ID,
             CATEGORY_ID,
@@ -83,7 +88,8 @@
     </select>
 
     <!-- 게시글 등록 -->
-    <insert id="insertBoard" parameterType="com.study.web.model.BoardDTO">
+    <insert id="insertBoard"
+            parameterType="com.study.web.model.BoardDTO">
         INSERT INTO BOARD
         (
             ID,
@@ -117,7 +123,8 @@
     </insert>
 
     <!-- 게시글 수정 -->
-    <update id="updateBoard" parameterType="com.study.web.model.BoardDTO">
+    <update id="updateBoard"
+            parameterType="com.study.web.model.BoardDTO">
         UPDATE BOARD
         SET
             CATEGORY_ID = #{categoryId},
@@ -132,13 +139,15 @@
     </update>
 
     <!-- 게시글 삭제 -->
-    <delete id="deleteBoard" parameterType="com.study.web.model.BoardDTO">
+    <delete id="deleteBoard"
+            parameterType="com.study.web.model.BoardDTO">
         DELETE FROM BOARD
         WHERE ID = #{id}
     </delete>
 
     <!-- 조회수 증가 -->
-    <update id="plusViews" parameterType="com.study.web.model.BoardDTO">
+    <update id="plusViews"
+            parameterType="com.study.web.model.BoardDTO">
         UPDATE BOARD
         SET
             VIEWS = VIEWS + 1

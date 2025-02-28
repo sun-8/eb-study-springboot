@@ -4,13 +4,17 @@
 <mapper namespace="com.study.web.mapper.MultiFileMapper">
 
     <!-- 날짜별 파일 총 개수 -->
-    <select id="cntMultiFileList" parameterType="String">
+    <select id="cntMultiFileList"
+            parameterType="String"
+            resultType="int">
         SELECT COUNT(*) FROM MULTI_FILE
         WHERE FILE_FOLDER = #{date}
     </select>
 
     <!-- 파일 조회 -->
-    <select id="selectMultiFile" parameterType="com.study.web.model.MultiFileDTO">
+    <select id="selectMultiFile"
+            parameterType="com.study.web.model.MultiFileDTO"
+            resultType="com.study.web.model.MultiFileDTO">
         SELECT
             FILE_ID,
             FILE_FOLDER,
@@ -26,7 +30,8 @@
     </select>
 
     <!-- 업로드 파일 저장 -->
-    <insert id="insertMultiFile" parameterType="com.study.web.model.MultiFileDTO">
+    <insert id="insertMultiFile"
+            parameterType="com.study.web.model.MultiFileDTO">
         INSERT INTO MULTI_FILE
         (
             FILE_ID,

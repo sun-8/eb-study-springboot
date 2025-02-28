@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<head th:replace="base/fragments/head :: headFragment"></head>
+
+<body>
+
+    <!-- 내용 -->
+    <section layout:fragment="body"></section>
+
+    <!-- 화면별 js -->
+    <th:block layout:fragment="script"></th:block>
+</body>
+
+</html>
