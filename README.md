@@ -7,6 +7,9 @@
 ## 기간
 2025.02.24(월) ~ 2025.02.28(금)
 
+## 의존성 추가
+![img_dependency.png](img_dependency.png)
+
 ## DB 구조
 ![img.png](img.png)
 
