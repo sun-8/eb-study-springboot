@@ -50,11 +50,27 @@ modBtn.addEventListener("click", (event) => {
 })
 
 // 삭제 버튼 이벤트
-let delBtn = document.getElementById("delBtn");
+const delBtn = document.getElementById("delBtn");
+const dialog = document.querySelector("dialog");
+const dialogCancel = document.querySelector("dialog #cancel");
+const dialogDelete = document.querySelector("dialog #delete");
 delBtn.addEventListener("click", (event) => {
     event.preventDefault();
-
+    // 비밀번호 입력 레이어 열기
+    dialog.showModal();
 })
+dialogCancel.addEventListener("click", (event) => {
+    event.preventDefault();
+    // 비밀번호 입력 레이어 닫기
+    dialog.close();
+});
+dialogDelete.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const password = document.getElementById("password");
+    // 비밀번호 확인 및 삭제
+    boardDelete(password);
+});
 
 // 댓글 목록 출력
 async function selectCommentList(key) {
@@ -107,4 +123,41 @@ async function insertComment(obj) {
     } catch (error) {
         alert('댓글 등록에 실패했습니다.');
     }
+}
+
+// 비밀번호 확인 및 삭제
+function boardDelete(password) {
+    const errorText = document.getElementById("errorText");
+    errorText.innerText = "";
+
+    if (password.value === '') {
+        errorText.innerText = "비밀번호를 입력해주세요.";
+        return false;
+    } else if (chkPassword(password)) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/boards/free/process', false);
+        xhr.send(JSON.stringify({"p": "D", "id": key.value}));
+    }
+}
+
+// 비밀번호 확인 - todo.
+function chkPassword(password) {
+    let rtn = false;
+
+    const xhr = new XMLHttpRequest();
+    const url = '/boards/free/chkPassword?id=' + key.value + '&password=' + password.value;
+    xhr.open('GET', url, false);
+    if (xhr.status === 200) {
+        const response = xhr.responseText;
+        if (response === "YES") {
+            rtn = true;
+        } else {
+            const errorText = document.getElementById("errorText");
+            errorText.innerText = "비밀번호가 일치하지 않습니다.";
+        }
+    } else {
+        console.log(xhr.status);
+        alert('비밀번호 확인을 할 수 없습니다.');
+    }
+    return rtn;
 }

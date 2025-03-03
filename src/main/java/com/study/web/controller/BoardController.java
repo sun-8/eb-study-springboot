@@ -115,6 +115,21 @@ public class BoardController {
         return "boards/free/write";
     }
 
+    /**
+     * 게시판 수정 화면
+     * @param model
+     * @param id
+     * @return
+     */
+    @GetMapping("modify")
+    public String modify(Model model,
+                         @RequestParam("id") String id) {
+
+        // 미구현
+        return "boards/free/modify";
+    }
+
+    // todo. 파일 업로드 처리는 form submit? js 비동기?
 //    /**
 //     * 게시판 등록 처리 - form submit 에서 파일 업로드
 //     * @param boardDTO
@@ -141,6 +156,43 @@ public class BoardController {
                              @RequestParam Map<String, String> fileMap) {
 
         int insertCnt = boardService.insertBoard2(boardDTO, fileMap);
+
+        return "redirect:/boards/free/list";
+    }
+
+    /**
+     * 게시판 비밀번호 확인
+     * @param id
+     * @param password
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("chkPassword")
+    public String checkPassword(@RequestParam("id") String id,
+                                @RequestParam("password") String password) {
+
+        BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setId(Integer.parseInt(id));
+        boardDTO.setPassword(password);
+        int chkPassword = boardService.chkPassword(boardDTO);
+
+        if (chkPassword == 0) {
+            return "NO";
+        } else {
+            return "YES";
+        }
+    }
+
+    /**
+     * 게시판 삭제 처리
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @PostMapping(value = "process", params = "p=D")
+    public String deleteData(@RequestParam int id) {
+
+        int cnt = boardService.deleteBoard(new BoardDTO(id));
 
         return "redirect:/boards/free/list";
     }

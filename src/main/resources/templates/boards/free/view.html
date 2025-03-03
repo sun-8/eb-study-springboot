@@ -77,6 +77,29 @@
         <button class="button delBtn" id="delBtn">삭제</button>
     </div>
 
+
+    <dialog class="wper30">
+        <table class="table">
+            <tbody>
+            <tr>
+                <th class="left">
+                    <label for="password">비밀번호 *</label>
+                </th>
+                <td>
+                    <input class="input" type="password" id="password" name="password"
+                           placeholder="비밀번호를 입력해주세요."/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <span id="errorText" class="txtRed"></span>
+        </div>
+        <div class="mt20 center">
+            <button class="button" id="cancel">취소</button>
+            <button class="button" id="delete">확인</button>
+        </div>
+    </dialog>
 </section>
 
 <th:block th:fragment="script">

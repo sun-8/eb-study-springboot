@@ -44,3 +44,32 @@
     background-color: darkgray;
     color: black;
 }
+
+.table{
+    width: 100%;
+    border-collapse: collapse; /*셀 간격 제거*/
+}
+
+.table tr{
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.table th{
+    padding: 10px 20px;
+    background-color: darkgray;
+}
+
+.table td{
+    padding: 10px;
+}
+
+#cancel{
+    width: 100px;
+    background-color: darkgray;
+    color: black;
+}
+
+#delete{
+    width: 100px;
+}

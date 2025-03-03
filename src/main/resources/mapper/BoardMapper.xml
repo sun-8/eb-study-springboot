@@ -138,6 +138,15 @@
         WHERE ID = #{id}
     </update>
 
+    <!-- 게시글 비밀번호 확인 -->
+    <select id="chkPassword"
+            resultType="int"
+            parameterType="com.study.web.model.BoardDTO">
+        SELECT COUNT(*) FROM BOARD
+        WHERE ID = #{id}
+        AND PASSWORD = #{password}
+    </select>
+
     <!-- 게시글 삭제 -->
     <delete id="deleteBoard"
             parameterType="com.study.web.model.BoardDTO">

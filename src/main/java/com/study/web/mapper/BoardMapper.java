@@ -52,6 +52,13 @@ public interface BoardMapper {
     int updateBoard(BoardDTO boardDTO);
 
     /**
+     * 게시글 비밀번호 확인
+     * @param boardDTO
+     * @return
+     */
+    int chkPassword(BoardDTO boardDTO);
+
+    /**
      * 게시글 삭제
      * @param boardDTO
      * @return

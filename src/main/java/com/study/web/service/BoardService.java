@@ -162,6 +162,18 @@ public class BoardService {
     }
 
     /**
+     * 게시판 비밀번호 확인
+     * @param boardDTO
+     * @return
+     */
+    public int chkPassword(BoardDTO boardDTO) {
+
+        int cnt = boardMapper.chkPassword(boardDTO);
+
+        return cnt;
+    }
+
+    /**
      * 게시판 삭제
      * @param boardDTO
      * @return
