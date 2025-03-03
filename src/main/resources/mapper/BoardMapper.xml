@@ -3,12 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.study.web.mapper.BoardMapper">
 
-    <!-- 게시글 총 개수 -->
+    <!-- 게시글 총 개수 todo. 약어 사용 금지, 변수명 신경쓰기-->
     <select id="selectAllCnt" resultType="int">
         SELECT COUNT(*) FROM BOARD
     </select>
 
-    <!-- 게시글 총 개수 (검색조건) -->
+    <!-- 게시글 총 개수 (검색조건) todo. <sql> 사용해보기-->
     <select id="selectCnt"
             resultType="int"
             parameterType="com.study.web.model.BoardDTO">

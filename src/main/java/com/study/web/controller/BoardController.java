@@ -50,7 +50,7 @@ public class BoardController {
             srchBoardDTO.setSrchRegDateStart(CommonUtil.localDatePlusY(srchBoardDTO.getSrchRegDateEnd(), -1));
         }
 
-        // 페이징
+        // 페이징 todo. in과 out을 dto 분리 , 페이지 계산은 다른 곳에서
         pageDTO.setStartIdx(pageDTO.getNowPage());
         pageDTO.setDataCnt(boardService.cntBoardList());
         pageDTO.setSrchDataCnt(boardService.cntBoardList(srchBoardDTO));

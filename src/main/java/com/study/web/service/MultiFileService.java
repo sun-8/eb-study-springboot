@@ -36,6 +36,7 @@ public class MultiFileService {
      */
     public MultiFileDTO upload(MultipartFile file) throws IOException {
 
+        // todo. 파일 금지 조건 추가 필요
         if (file == null || file.isEmpty()) {
             return null;
         }
@@ -61,6 +62,7 @@ public class MultiFileService {
 
         MultiFileDTO multiFileDTO = this.getMultiFile(new MultiFileDTO(fileId));
 
+        // todo. byte buffer 사용
         Resource resource = new FileSystemResource(multiFileDTO.getFilePath() + "\\" + fileId);
 
         // URL 인코딩을 사용하여 파일 이름을 처리 - 한글 처리
@@ -132,6 +134,7 @@ public class MultiFileService {
         String fileExtend = st.nextToken();
         // 날짜별 파일 개수
         int fileCnt = this.cntMultiFileList(fileFolder);
+        // todo. 만약, 동시에 파일 업로드를 했고 동시에 올린 파일 이름이 같다면? 문제 생김. 멀티스레드 고려
         String fileId = fileFolder + "_" + (fileCnt + 1) + "_" + fileName;
 
         MultiFileDTO multiFileDTO = new MultiFileDTO();

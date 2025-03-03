@@ -125,7 +125,7 @@ public class BoardService {
      */
     public int insertBoard2(BoardDTO boardDTO, Map<String, String> fileMap) {
 
-        // 파일 업로드 한 값 셋팅
+        // 파일 업로드 한 값 셋팅 todo. name 배열로 받기
         if (!CommonUtil.isEmpty(fileMap.get("file1Id"))) {
             boardDTO.setFile1(fileMap.get("file1Id"));
         }
@@ -137,7 +137,7 @@ public class BoardService {
         }
 
         int cnt = 0;
-        // 유효성 검증
+        // 유효성 검증 todo. validate annotation
         if (!(CommonUtil.isEmpty(boardDTO.getCategoryId())
                 || CommonUtil.isEmpty(boardDTO.getUserName())
                 || CommonUtil.isEmpty(boardDTO.getPassword())
